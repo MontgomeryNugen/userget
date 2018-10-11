@@ -1,8 +1,6 @@
-$().ready(function () {
+$().ready(() => {
 
-    var url = "http://localhost:8080/Users/List";
-
-    $.getJSON(url)
+    $.getJSON("http://localhost:8080/Users/Get?id=1")
         .then(function(users) {
             console.log(users);
             render(users);
@@ -10,17 +8,11 @@ $().ready(function () {
 });
 
 function render(users) {
-    var tbody = $("#tbody");
-    
-    tbody.empty();
-    for(var user of users) {
-        var row = "<tr>";
-        row += "<td>" + user.id + "</td>";
-        row += "<td>" + user.userName + "</td>";
-        row += "<td>" + user.firstName + " " + user.lastName + "</td>";
-        row += "</tr>";
-
-        tbody.append(row);
-    }
-
+    $("#pid").val(users.id);
+    $("#pname").val(users.firstName + " " + users.lastName);
+    $("#pusername").val(users.userName);
+    $("#pphone").val(users.phoneNumber);
+    $("#pemail").val(users.email);
+    $("#previewer").prop("checked", users.reviewer);
+    $("#padmin").prop("checked", users.admin);
 }
